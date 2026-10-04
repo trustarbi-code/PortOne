@@ -7,7 +7,17 @@ import { CHAT_CONFIG, getBackend, isDemo, isAdminOnline, sendAlert, esc, fmtTime
 const P = CHAT_CONFIG.profile || {};
 
 const base = new URL(".", import.meta.url);           // chat/ 폴더 위치
-const avatarUrl = new URL(P.avatar ? P.avatar.replace(/^chat\//, "") : "avatar.jpg", base).href;
+// 프로필 아바타 파일: CHAT_CONFIG.profile.avatar가 지정돼 있으면 그걸 쓰고,
+// 없으면 현재 페이지의 --accent 색상(오렌지 테마 등)을 보고 자동으로 골라요.
+function pickAvatarFile() {
+  if (P.avatar) return P.avatar.replace(/^chat\//, "");
+  try {
+    var accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim().toLowerCase();
+    if (accent === "#fc6b2d") return "avatar-orange.jpg";
+  } catch (e) {}
+  return "avatar.jpg";
+}
+const avatarUrl = new URL(pickAvatarFile(), base).href;
 
 /* ------------------------------ 스타일 ------------------------------ */
 const CSS = `
