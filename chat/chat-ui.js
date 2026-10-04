@@ -14,6 +14,7 @@ const CSS = `
 .ecw{--c-accent:var(--accent,#1088ED);--c-deep:var(--accent-deep,#0875D1);--c-bg:var(--bg,#fff);--c-surface:var(--surface,#fff);
   --c-surface2:var(--surface-2,#F3F9FF);--c-ink:var(--ink,#17161B);--c-soft:var(--ink-soft,#4A4A52);--c-muted:var(--muted,#7A7A82);
   --c-line:var(--line,#E6E5E5);--c-navy:var(--invert-bg,#172B4D);--c-cta:#0875D1;
+  --c-accent-soft:var(--accent-soft,rgba(16,136,237,.09));--c-accent-line:var(--accent-line,rgba(16,136,237,.32));
   font-family:var(--kr,"Pretendard Variable","Noto Sans KR",-apple-system,BlinkMacSystemFont,sans-serif);
   -webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere;}
 .ecw *{box-sizing:border-box;}
@@ -52,14 +53,14 @@ const CSS = `
 
 /* 첫 방문 말풍선 */
 .ecw-teaser{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:calc(max(20px,env(safe-area-inset-bottom)) + 74px);z-index:900;
-  max-width:260px;display:flex;align-items:center;gap:10px;padding:12px 14px 12px 12px;border-radius:16px 16px 4px 16px;background:var(--c-surface);
-  color:var(--c-ink);border:1px solid var(--c-line);box-shadow:0 14px 34px -12px rgba(15,30,60,.28);cursor:pointer;
+  max-width:260px;display:flex;align-items:center;gap:10px;padding:12px 14px 12px 12px;border-radius:16px 16px 4px 16px;background:var(--c-accent-soft);
+  color:var(--c-ink);border:1px solid var(--c-accent-line);box-shadow:0 14px 34px -12px rgba(15,30,60,.28);cursor:pointer;
   opacity:0;transform:translateY(8px) scale(.98);pointer-events:none;transition:opacity .35s,transform .35s cubic-bezier(.2,.75,.25,1);}
 .ecw-teaser.show{opacity:1;transform:none;pointer-events:auto;}
 .ecw-teaser img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;}
 .ecw-teaser b{display:block;font-size:.86rem;font-weight:800;line-height:1.35;}
 .ecw-teaser span{display:block;font-size:.76rem;color:var(--c-muted);margin-top:2px;line-height:1.35;}
-.ecw-teaser .tx-close{position:absolute;top:-8px;left:-8px;width:22px;height:22px;border-radius:50%;border:1px solid var(--c-line);
+.ecw-teaser .tx-close{position:absolute;top:-8px;left:-8px;width:22px;height:22px;border-radius:50%;border:1px solid var(--c-accent-line);
   background:var(--c-surface);color:var(--c-muted);font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0;}
 
 /* 채팅창 */
