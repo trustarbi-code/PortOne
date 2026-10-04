@@ -730,10 +730,10 @@ footer{background:var(--bg-2);border-top:0}
 
 
 /* ── 첫 진입 이벤트 팝업 ── */
-.evt-dim{position:fixed;inset:0;z-index:1250;background:rgba(10,14,22,.55);animation:fadeIn .3s ease}
-.evt{position:fixed;z-index:1260;left:50%;top:50%;width:min(380px,calc(100vw - 32px));transform:translate(-50%,-50%);background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -24px rgba(0,0,0,.45);animation:popIn .45s cubic-bezier(.2,1.2,.4,1)}
+.evt-dim{position:fixed;inset:0;z-index:1250;background:transparent}
+.evt{position:fixed;z-index:1260;right:24px;bottom:24px;left:auto;top:auto;width:min(340px,calc(100vw - 32px));background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(10,14,22,.35),0 0 0 1px rgba(17,19,24,.06);animation:popIn .45s cubic-bezier(.2,1.2,.4,1)}
 @keyframes fadeIn{from{opacity:0}}
-@keyframes popIn{from{opacity:0;transform:translate(-50%,-44%) scale(.96)}}
+@keyframes popIn{from{opacity:0;transform:translateY(18px) scale(.97)}}
 .evt-top{position:relative;height:150px;background:linear-gradient(135deg,#E2541A,#FC6B2D 55%,#FF9A66);overflow:hidden}
 .evt-top::before{content:"";position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12)}
 .evt-top::after{content:"";position:absolute;left:-30px;bottom:-70px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08)}
@@ -759,7 +759,7 @@ footer{background:var(--bg-2);border-top:0}
 .evt-foot button+button{border-left:1px solid var(--line);color:var(--ink);font-weight:700}
 .evt-foot button:hover{background:var(--bg-2)}
 @media(max-width:640px){
-  .evt{left:0;right:0;top:auto;bottom:0;width:100%;transform:none;border-radius:22px 22px 0 0;animation:sheetUp .45s cubic-bezier(.2,.9,.3,1);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .evt{left:0;right:0;top:auto;bottom:0;width:100%;transform:none;border-radius:22px 22px 0 0;animation:sheetUp .45s cubic-bezier(.2,.9,.3,1);padding-bottom:env(safe-area-inset-bottom,0px);max-height:min(62vh,440px);overflow-y:auto}
   @keyframes sheetUp{from{transform:translateY(100%)}}
   .evt-top{height:128px}
   .evt-body h2{font-size:1.38rem}
@@ -777,7 +777,7 @@ footer{background:var(--bg-2);border-top:0}
 .evt-body h2{font-size:1.4rem;line-height:1.4}
 .evt-btns{margin-top:18px}
 .evt-body h2 small{display:block;font-size:.62em;font-weight:700;color:var(--sale);letter-spacing:-.01em;margin-bottom:4px}
-@media(max-width:640px){.evt{width:100%}.evt-top{height:auto;padding:22px 20px 22px}.evt-body h2{font-size:1.34rem}}
+@media(max-width:640px){.evt{width:100%}.evt-top{height:auto;padding:16px 20px 18px;gap:10px}.evt-face{width:68px;height:68px}.evt-stk{right:-14px;top:-2px;font-size:.62rem;padding:4px 7px}.evt-body{padding:16px 22px 16px}.evt-body h2{font-size:1.2rem;line-height:1.36}.evt-body h2 small{margin-bottom:2px}.evt-btns{margin-top:12px}}
 
 
 /* 장바구니: 오은비 1개 상품 + 프로젝트 옵션 */
@@ -1504,9 +1504,9 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
 .pkg-sh{width:42%;height:10px;border-radius:50%;background:rgba(0,0,0,.12);filter:blur(3px);margin-top:10px;transition:width .35s,opacity .35s}
 .card:hover .pkg-box{transform:rotate(-2deg) translateY(-5px)}
 .card:hover .pkg-sh{width:36%;opacity:.7}
-.pkg-off{position:absolute;z-index:2;right:12px;top:12px;width:56px;height:56px;border-radius:50%;background:var(--sale);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:.86rem;letter-spacing:-.02em;transform:rotate(10deg);box-shadow:0 6px 14px -6px rgba(242,52,75,.7)}
-.pkg-flag{position:absolute;z-index:2;left:12px;top:12px;font-size:.66rem;font-weight:700;color:var(--ink-soft);background:rgba(255,255,255,.85);border:1px solid rgba(17,19,24,.1);border-radius:100px;padding:3px 9px;white-space:nowrap}
-.pkg-flag.g{background:var(--gold);border-color:var(--gold);color:#fff}
+.pkg-off{position:absolute;z-index:2;right:12px;top:12px;width:56px;height:56px;border-radius:50%;background:var(--pc);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:.86rem;letter-spacing:-.02em;transform:rotate(10deg);box-shadow:0 6px 14px -6px color-mix(in srgb,var(--pc) 65%,transparent)}
+.pkg-flag{position:absolute;z-index:2;left:12px;top:12px;font-size:.66rem;font-weight:700;color:#fff;background:var(--pc);border:1px solid transparent;border-radius:100px;padding:3px 9px;white-space:nowrap}
+.pkg-flag.g{background:var(--pc);border-color:transparent;color:#fff}
 .pkg-cap{position:absolute;left:8px;right:8px;bottom:10px;display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;font-size:.72rem;color:var(--muted);font-weight:600;line-height:1.35}
 .pkg-cap .v{font-size:.84rem;color:var(--ink-soft)}
 .pkg-cap s{color:var(--faint)}
@@ -1562,7 +1562,6 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
       </div>
       <div class="gnb-sub">
         <a href="#" data-pdf-page="1"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/></svg>상세 Portfolio</a>
-        <a href="#cs"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg>고객센터</a>
       </div>
     </div>
   </nav>
@@ -2060,7 +2059,7 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
   <div class="evt-top">
     <button type="button" class="evt-x" data-evt-close aria-label="닫기">&times;</button>
     <span class="evt-badge"><i></i>OPEN EVENT · 지금 영입 가능</span>
-    <div class="evt-face"><img data-copy="profile" alt="오은비 프로필 사진" width="92" height="92"><span class="evt-stk">매진임박</span></div>
+    <div class="evt-face"><img data-copy="profile" alt="오은비 프로필 사진" width="92" height="92"><span class="evt-stk">즉시 면접 가능</span></div>
   </div>
   <div class="evt-body">
     <h2 id="evtTitle"><small>놓치지 마세요!</small><span>11년 차 운영 PM</span><br>지금 영입 가능해요</h2>
@@ -2784,10 +2783,10 @@ dlBtn.addEventListener('click',function(){
     var hidden=false;try{hidden=localStorage.getItem(KEY)===today()}catch(e){}
     function open(){
       if(pdpOpen||cartEl.classList.contains('on')||document.querySelector('.pdfv.open,.lightbox.open'))return;
-      lastFocus=document.activeElement;ev.hidden=false;dimE.hidden=false;document.body.style.overflow='hidden';
+      lastFocus=document.activeElement;ev.hidden=false;dimE.hidden=false;
       setTimeout(function(){var b=$('[data-evt-go="best"]',ev);b&&b.focus({preventScroll:true})},60);
     }
-    function close(){if(ev.hidden)return;ev.hidden=true;dimE.hidden=true;if(!pdpOpen&&!cartEl.classList.contains('on'))document.body.style.overflow='';try{lastFocus&&lastFocus.focus({preventScroll:true})}catch(e){}}
+    function close(){if(ev.hidden)return;ev.hidden=true;dimE.hidden=true;try{lastFocus&&lastFocus.focus({preventScroll:true})}catch(e){}}
     $$('[data-evt-close]',ev).forEach(function(b){b.addEventListener('click',close)});
     dimE.addEventListener('click',close);
     $('#evtToday').addEventListener('click',function(){try{localStorage.setItem(KEY,today())}catch(e){}close();toast('오늘은 다시 보이지 않아요')});
@@ -2795,7 +2794,7 @@ dlBtn.addEventListener('click',function(){
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ev.hidden){e.stopImmediatePropagation();close()}},true);
     window.__showEvent=open;
     var force=location.hash==='#event';
-    if(!hidden||force)setTimeout(open,force?200:700);
+    if(!hidden||force)setTimeout(open,force?200:1400);
     var pr=document.querySelector('.promo');if(pr){pr.addEventListener('click',open);pr.addEventListener('keydown',function(e){if(e.key==='Enter')open()})}
   })();
 
