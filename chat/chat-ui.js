@@ -7,24 +7,13 @@ import { CHAT_CONFIG, getBackend, isDemo, isAdminOnline, sendAlert, esc, fmtTime
 const P = CHAT_CONFIG.profile || {};
 
 const base = new URL(".", import.meta.url);           // chat/ 폴더 위치
-// 프로필 아바타 파일: CHAT_CONFIG.profile.avatar가 지정돼 있으면 그걸 쓰고,
-// 없으면 현재 페이지의 --accent 색상(오렌지 테마 등)을 보고 자동으로 골라요.
-function pickAvatarFile() {
-  if (P.avatar) return P.avatar.replace(/^chat\//, "");
-  try {
-    var accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim().toLowerCase();
-    if (accent === "#fc6b2d") return "avatar-orange.jpg";
-  } catch (e) {}
-  return "avatar.jpg";
-}
-const avatarUrl = new URL(pickAvatarFile(), base).href;
+const avatarUrl = new URL(P.avatar ? P.avatar.replace(/^chat\//, "") : "avatar.jpg", base).href;
 
 /* ------------------------------ 스타일 ------------------------------ */
 const CSS = `
 .ecw{--c-accent:var(--accent,#1088ED);--c-deep:var(--accent-deep,#0875D1);--c-bg:var(--bg,#fff);--c-surface:var(--surface,#fff);
   --c-surface2:var(--surface-2,#F3F9FF);--c-ink:var(--ink,#17161B);--c-soft:var(--ink-soft,#4A4A52);--c-muted:var(--muted,#7A7A82);
   --c-line:var(--line,#E6E5E5);--c-navy:var(--invert-bg,#172B4D);--c-cta:#0875D1;
-  --c-accent-soft:var(--accent-soft,rgba(16,136,237,.09));--c-accent-line:var(--accent-line,rgba(16,136,237,.32));
   font-family:var(--kr,"Pretendard Variable","Noto Sans KR",-apple-system,BlinkMacSystemFont,sans-serif);
   -webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere;}
 .ecw *{box-sizing:border-box;}
@@ -63,14 +52,14 @@ const CSS = `
 
 /* 첫 방문 말풍선 */
 .ecw-teaser{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:calc(max(20px,env(safe-area-inset-bottom)) + 74px);z-index:900;
-  max-width:260px;display:flex;align-items:center;gap:10px;padding:12px 14px 12px 12px;border-radius:16px 16px 4px 16px;background:var(--c-accent-soft);
-  color:var(--c-ink);border:1px solid var(--c-accent-line);box-shadow:0 14px 34px -12px rgba(15,30,60,.28);cursor:pointer;
+  max-width:260px;display:flex;align-items:center;gap:10px;padding:12px 14px 12px 12px;border-radius:16px 16px 4px 16px;background:var(--c-surface);
+  color:var(--c-ink);border:1px solid var(--c-line);box-shadow:0 14px 34px -12px rgba(15,30,60,.28);cursor:pointer;
   opacity:0;transform:translateY(8px) scale(.98);pointer-events:none;transition:opacity .35s,transform .35s cubic-bezier(.2,.75,.25,1);}
 .ecw-teaser.show{opacity:1;transform:none;pointer-events:auto;}
 .ecw-teaser img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;}
 .ecw-teaser b{display:block;font-size:.86rem;font-weight:800;line-height:1.35;}
 .ecw-teaser span{display:block;font-size:.76rem;color:var(--c-muted);margin-top:2px;line-height:1.35;}
-.ecw-teaser .tx-close{position:absolute;top:-8px;left:-8px;width:22px;height:22px;border-radius:50%;border:1px solid var(--c-accent-line);
+.ecw-teaser .tx-close{position:absolute;top:-8px;left:-8px;width:22px;height:22px;border-radius:50%;border:1px solid var(--c-line);
   background:var(--c-surface);color:var(--c-muted);font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0;}
 
 /* 채팅창 */
@@ -172,7 +161,6 @@ root.className = "ecw";
 root.innerHTML = `
   <div class="ecw-teaser" role="button" tabindex="0" aria-label="상담창 열기">
     <button class="tx-close" type="button" aria-label="안내 닫기">×</button>
-    <img src="${avatarUrl}" alt="">
     <div><b>궁금한 점, 바로 물어보세요</b><span>${esc(P.name || "")}에게 직접 메시지가 전달돼요</span></div>
   </div>
   <div class="ecw-panel" role="dialog" aria-modal="false" aria-label="${esc(P.name || "")} 실시간 상담">
