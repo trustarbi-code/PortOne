@@ -8,6 +8,7 @@ const P = CHAT_CONFIG.profile || {};
 
 const base = new URL(".", import.meta.url);           // chat/ 폴더 위치
 const avatarUrl = new URL(P.avatar ? P.avatar.replace(/^chat\//, "") : "avatar.jpg", base).href;
+const avatarInitial = esc(((P.name || "상담").trim().charAt(0)) || "상");
 
 /* ------------------------------ 스타일 ------------------------------ */
 const CSS = `
@@ -74,6 +75,7 @@ const CSS = `
 .ecw-head::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(80% 120% at 0% 0%,rgba(79,168,245,.28),transparent 60%);}
 .ecw-av{position:relative;width:44px;height:44px;flex-shrink:0;z-index:1;}
 .ecw-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.85);}
+.ecw-av-ph{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--c-cta);color:#fff;font-weight:800;font-size:1.05rem;border:2px solid rgba(255,255,255,.85);}
 .ecw-av i{position:absolute;right:-1px;bottom:-1px;width:13px;height:13px;border-radius:50%;background:#94A3B8;border:2.5px solid var(--c-navy);}
 .ecw.online .ecw-av i{background:#22C55E;}
 .ecw-who{flex:1;min-width:0;z-index:1;}
@@ -87,6 +89,7 @@ const CSS = `
 .ecw-row{display:flex;gap:8px;margin-bottom:6px;align-items:flex-end;}
 .ecw-row.me{justify-content:flex-end;}
 .ecw-row .mini{width:28px;height:28px;border-radius:50%;object-fit:cover;flex-shrink:0;align-self:flex-start;}
+.ecw-row .mini.ph{display:flex;align-items:center;justify-content:center;background:var(--c-cta);color:#fff;font-weight:800;font-size:.76rem;}
 .ecw-row .mini.ghost{visibility:hidden;}
 .ecw-col{display:flex;flex-direction:column;max-width:78%;}
 .ecw-row.me .ecw-col{align-items:flex-end;}
@@ -166,7 +169,7 @@ root.innerHTML = `
   <div class="ecw-panel" role="dialog" aria-modal="false" aria-label="${esc(P.name || "")} 실시간 상담">
     ${isDemo ? '<div class="ecw-demo">미리보기 모드 · 실제 전송되지 않아요 (Firebase 연결 전)</div>' : ""}
     <div class="ecw-head">
-      <div class="ecw-av"><img src="${avatarUrl}" alt=""><i></i></div>
+      <div class="ecw-av"><div class="ecw-av-ph">${avatarInitial}</div><i></i></div>
       <div class="ecw-who"><b>${esc(P.name || "")}</b><span class="ecw-status">연결 중…</span></div>
       <button class="ecw-close" type="button" aria-label="상담창 닫기">${I.close}</button>
     </div>
@@ -235,7 +238,7 @@ function card() {
     <div class="acts"><button type="button" class="skip">괜찮아요</button><button type="button" class="save">남기기</button></div></div>`;
 }
 function bubble(who, text, ms, showMeta, showName) {
-  const av = who === "them" ? `<img class="mini${showName ? "" : " ghost"}" src="${avatarUrl}" alt="">` : "";
+  const av = who === "them" ? `<div class="mini ph${showName ? "" : " ghost"}">${avatarInitial}</div>` : "";
   return `<div class="ecw-row ${who}">${av}<div class="ecw-col">${showName && who === "them" ? `<div class="ecw-name">${esc(P.name || "")}</div>` : ""}
     <div class="ecw-bub">${esc(text)}</div>${showMeta && ms ? `<div class="ecw-meta">${fmtTime(ms)}</div>` : ""}</div></div>`;
 }
